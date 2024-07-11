@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="category"
+            type="com.example.route.domain.model.Category" />
 
     </data>
 
@@ -17,6 +19,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_margin="8dp"
+            app:urlCircular="@{category.image}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,6 +33,7 @@
             android:fontFamily="@font/poppins_regular"
             android:textColor="@color/blue"
             android:textSize="14sp"
+            android:text="@{category.name}"
             app:layout_constraintEnd_toEndOf="@id/category_img"
             app:layout_constraintStart_toStartOf="@id/category_img"
             app:layout_constraintTop_toBottomOf="@id/category_img"

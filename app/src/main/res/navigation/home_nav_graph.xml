@@ -23,11 +23,11 @@
         android:name="com.example.route.e_commerce.ui.main.fragments.categories.CategoriesFragment"
         android:label="CategoriesFragment"
         tools:layout="@layout/fragment_categories">
-       <!-- <argument
+        <argument
             android:name="category"
             android:defaultValue="@null"
-            app:argType="com.example.domain.model.Category"
-            app:nullable="true" />-->
+            app:argType="com.example.route.domain.model.Category"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/productListFragment"
