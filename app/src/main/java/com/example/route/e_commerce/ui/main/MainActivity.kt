@@ -59,7 +59,10 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.wishListFragment)
                     true
                 }
-
+                R.id.productListFragment -> {
+                    navController.navigate(R.id.productListFragment)
+                    true
+                }
                 else -> false
             }
         }

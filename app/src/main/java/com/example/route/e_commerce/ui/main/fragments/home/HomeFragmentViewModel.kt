@@ -1,41 +1,60 @@
 package com.example.route.e_commerce.ui.main.fragments.home
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.route.domain.common.Resource
-import com.example.route.domain.model.Category
 import com.example.route.domain.usecase.GetCategoriesUseCase
 import com.example.route.e_commerce.base.BaseViewModel
+import com.example.route.e_commerce.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
-) : BaseViewModel() {
+) : BaseViewModel(), HomeContract.ViewModel {
 
-
-    val categories = MutableLiveData<List<Category>?>()
-
-    fun getCategories() {
+    private fun getCategories() {
         viewModelScope.launch(Dispatchers.IO) {
             getCategoriesUseCase.invoke()
                 .collect { resourse ->
                     when (resourse) {
                         is Resource.Success -> {
-                            categories.postValue(resourse.data)
+                            _state.emit(HomeContract.State.Success(
+                                categories = resourse.data
+                            ))
                         }
                         else ->{
-                            extractViewMessage(resourse)
+                            extractViewMessage(resourse)?.let {
+                                _event.postValue(HomeContract.Event.ShowMessage(it))
+                            }
                         }
                     }
                 }
         }
 
+    }
+
+    private val _state = MutableStateFlow<HomeContract.State>(HomeContract.State.LoadingState)
+    override val state: StateFlow<HomeContract.State>
+        get() = _state
+
+    private val _event = SingleLiveEvent<HomeContract.Event>()
+    override val event: LiveData<HomeContract.Event>
+        get() = _event
+
+    override fun doAction(action: HomeContract.Action) {
+        when (action) {
+             HomeContract.Action.InitPage -> {
+                initPage()
+            }
+        }
+    }
+    private fun initPage() {
+        getCategories()
     }
 }

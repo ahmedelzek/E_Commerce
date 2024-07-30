@@ -2,49 +2,85 @@ package com.example.route.e_commerce.ui.main.fragments.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.route.domain.model.Category
 import com.example.route.e_commerce.R
 import com.example.route.e_commerce.base.BaseFragment
+import com.example.route.e_commerce.base.showDialog
 import com.example.route.e_commerce.databinding.FragmentHomeBinding
 import com.example.route.e_commerce.ui.main.fragments.home.adapters.CategoriesAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() {
     private val categoriesAdapter = CategoriesAdapter()
 
-    private val myViewModel: HomeFragmentViewModel by viewModels()
+    private val myViewModel: HomeContract.ViewModel by viewModels<HomeFragmentViewModel>()
 
     override fun initViewModel(): HomeFragmentViewModel {
-        return myViewModel
+        return myViewModel as HomeFragmentViewModel
     }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
     }
-    //private val mostSellingProductsAdapter = ProductsAdapter()
-   // private val categoryProductsAdapter = ProductsAdapter()
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         observeViewModel()
-        viewModel.getCategories()
+        viewModel.doAction(HomeContract.Action.InitPage)
     }
 
     private fun observeViewModel() {
-        viewModel.categories.observe(viewLifecycleOwner) {
-            it?.let {
-                categoriesAdapter.bindCategories(it)
+        viewModel.event.observe(viewLifecycleOwner) {
+            handleEvent(it)
+        }
+        lifecycleScope.launch {
+            viewModel.state.collect{
+                renderViewState(it)
             }
         }
     }
 
+    private fun handleEvent(event: HomeContract.Event) {
+        when (event) {
+           is HomeContract.Event.ShowMessage->{
+                showDialog(event.viewMessage)
+            }
+        }
+    }
+
+    private fun renderViewState(state: HomeContract.State){
+        when(state){
+            is HomeContract.State.Success ->{
+                showCategories(state.categories)
+            }
+            is HomeContract.State.LoadingState ->{
+                showLoadingState()
+            }
+        }
+    }
+    private fun showCategories(categories: List<Category>?) {
+        categories?.let {
+            categoriesAdapter.bindCategories(it)
+            binding.mostSellingProductsShimmerViewContainer.visibility = View.INVISIBLE
+            binding.categoriesShimmerViewContainer.visibility = View.INVISIBLE
+            binding.categoryProductsShimmerViewContainer.visibility = View.INVISIBLE
+        }
+    }
+    private fun showLoadingState(){
+        binding.mostSellingProductsShimmerViewContainer.isVisible = true
+        binding.categoriesShimmerViewContainer.isVisible = true
+        binding.categoryProductsShimmerViewContainer.isVisible = true
+    }
+
+
     private fun initViews() {
-        categoriesAdapter.categoryClicked = { position, category ->
+        categoriesAdapter.categoryClicked = { _, _ ->
 //            navigateToCategoriesFragment(category)
         }
 
@@ -59,31 +95,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
     }
 
 
-  /*  private fun navigateToProductDetailsFragment(product: Product) {
-        val intent = Intent(context, ProductDetailsActivity::class.java)
-        intent.putExtra(Product.PRODUCT, product)
-        startActivity(intent)
-    }*/
-
-
-
-    private fun navigateToCategoriesFragment(category: Category) {
-//        val action = HomeFragmentDirections.actionHomeFragmentToCategoriesFragment(category)
-//        findNavController().navigate(action)
-    }
-
-
-
-    override fun onResume() {
-        super.onResume()
-//        binding.categoriesShimmerViewContainer.startShimmer()
-    }
-
-    override fun onPause() {
-//        binding.categoriesShimmerViewContainer.stopShimmer()
-        super.onPause()
-
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         binding.unbind()
