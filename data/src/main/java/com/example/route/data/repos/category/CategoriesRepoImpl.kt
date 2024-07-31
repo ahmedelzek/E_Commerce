@@ -1,6 +1,6 @@
 package com.example.route.data.repos.category
 
-import com.example.route.data.contract.category.CategoriesOnlineDataSource
+import com.example.route.data.contract.CategoriesOnlineDataSource
 import com.example.route.data.toFlow
 import com.example.route.domain.common.Resource
 import com.example.route.domain.contract.category.CategoriesRepo

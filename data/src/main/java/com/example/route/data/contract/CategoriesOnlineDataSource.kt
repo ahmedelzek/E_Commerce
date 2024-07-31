@@ -1,4 +1,4 @@
-package com.example.route.data.contract.category
+package com.example.route.data.contract
 
 import com.example.route.domain.model.Category
 
