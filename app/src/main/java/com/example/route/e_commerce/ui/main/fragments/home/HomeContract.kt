@@ -17,6 +17,7 @@ class HomeContract{
 
     sealed class Action{
         data object InitPage : Action()
+        data class LoadProducts(val categoryId: String) : Action()
     }
 
     sealed class Event{
@@ -26,7 +27,8 @@ class HomeContract{
         data object LoadingState: State()
         data class Success(
             val categories: List<Category>? = null,
-            val mostSellingProducts: List<Product>? = null
+            val mostSellingProducts: List<Product>? = null,
+            val products: List<Product>? = null
         ): State()
     }
 
