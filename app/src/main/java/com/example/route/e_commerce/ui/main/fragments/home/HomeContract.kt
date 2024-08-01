@@ -2,6 +2,7 @@ package com.example.route.e_commerce.ui.main.fragments.home
 
 import androidx.lifecycle.LiveData
 import com.example.route.domain.model.Category
+import com.example.route.domain.model.Product
 import com.example.route.e_commerce.base.ViewMessage
 import kotlinx.coroutines.flow.StateFlow
 
@@ -24,7 +25,8 @@ class HomeContract{
     sealed class State{
         data object LoadingState: State()
         data class Success(
-            val categories: List<Category>? = null
+            val categories: List<Category>? = null,
+            val mostSellingProducts: List<Product>? = null
         ): State()
     }
 

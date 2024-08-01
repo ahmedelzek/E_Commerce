@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="product"
+            type="com.example.route.domain.model.Product" />
 
     </data>
 
@@ -28,6 +30,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:url="@{product.imageCover}"
                 tools:ignore="ContentDescription" />
 
             <TextView
@@ -40,6 +43,7 @@
                 android:maxLines="1"
                 android:textColor="@color/DarkBlue"
                 android:textSize="14sp"
+                android:text="@{product.title}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/product_img" />
@@ -74,7 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="@string/egp_1_200"
+                android:text="@{product.price.toString()}"
+                tools:text="@string/egp_1_200"
                 android:textColor="@color/DarkBlue"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@id/product_name"
@@ -86,7 +91,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="@string/egp_1_500"
+                android:text="@{product.priceAfterDiscount.toString()}"
+                tools:text="@string/egp_1_500"
                 android:textColor="@color/pale_blue"
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="@id/product_price"
@@ -114,6 +120,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/DarkBlue"
                 android:textSize="14sp"
+                android:text="@{product.ratingsQuantity.toString()}"
                 app:layout_constraintStart_toEndOf="@id/review_tv"
                 app:layout_constraintTop_toBottomOf="@id/product_price"
                 tools:text="(4.5)" />

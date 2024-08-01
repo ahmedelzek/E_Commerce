@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.route.domain.common.Resource
 import com.example.route.domain.usecase.GetCategoriesUseCase
+import com.example.route.domain.usecase.GetMostSellingProductsUseCase
 import com.example.route.e_commerce.base.BaseViewModel
 import com.example.route.e_commerce.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeFragmentViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val getMostSellingProductsUseCase: GetMostSellingProductsUseCase
 ) : BaseViewModel(), HomeContract.ViewModel {
 
     private fun getCategories() {
@@ -24,11 +26,14 @@ class HomeFragmentViewModel @Inject constructor(
                 .collect { resourse ->
                     when (resourse) {
                         is Resource.Success -> {
-                            _state.emit(HomeContract.State.Success(
-                                categories = resourse.data
-                            ))
+                            _state.emit(
+                                HomeContract.State.Success(
+                                    categories = resourse.data
+                                )
+                            )
                         }
-                        else ->{
+
+                        else -> {
                             extractViewMessage(resourse)?.let {
                                 _event.postValue(HomeContract.Event.ShowMessage(it))
                             }
@@ -37,6 +42,29 @@ class HomeFragmentViewModel @Inject constructor(
                 }
         }
 
+    }
+
+    private fun getMostSellingProducts() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getMostSellingProductsUseCase.invoke()
+                .collect { resourse ->
+                    when (resourse) {
+                        is Resource.Success -> {
+                            _state.emit(
+                                HomeContract.State.Success(
+                                    mostSellingProducts = resourse.data
+                                )
+                            )
+                        }
+
+                        else -> {
+                            extractViewMessage(resourse)?.let {
+                                _event.postValue(HomeContract.Event.ShowMessage(it))
+                            }
+                        }
+                    }
+                }
+        }
     }
 
     private val _state = MutableStateFlow<HomeContract.State>(HomeContract.State.LoadingState)
@@ -49,12 +77,14 @@ class HomeFragmentViewModel @Inject constructor(
 
     override fun doAction(action: HomeContract.Action) {
         when (action) {
-             HomeContract.Action.InitPage -> {
+            HomeContract.Action.InitPage -> {
                 initPage()
             }
         }
     }
+
     private fun initPage() {
         getCategories()
+        getMostSellingProducts()
     }
 }
