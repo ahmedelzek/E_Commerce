@@ -2,6 +2,10 @@ package com.example.route.data.datasource
 
 import com.example.route.data.contract.CategoriesOnlineDataSource
 import com.example.route.data.contract.ProductsOnlineDataSource
+import com.example.route.data.contract.SubcategoriesOnlineDataSource
+import com.example.route.data.datasource.category.CategoriesOnlineDataSourceImpl
+import com.example.route.data.datasource.product.ProductsOnlineDataSourceImpl
+import com.example.route.data.datasource.subcategory.SubcategoriesOnlineDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,5 +24,11 @@ abstract class OnlineDataSourceModule {
     abstract fun bindProductsOnlineDataSource(
         productsOnlineDataSourceImpl: ProductsOnlineDataSourceImpl
     ): ProductsOnlineDataSource
+
+    @Binds
+    abstract fun bindSubcategoriesOnlineDataSource(
+        subcategoriesOnlineDataSourceImpl: SubcategoriesOnlineDataSourceImpl
+    ): SubcategoriesOnlineDataSource
+
 
 }

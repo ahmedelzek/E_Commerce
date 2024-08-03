@@ -4,7 +4,7 @@ import com.example.route.domain.common.Resource
 import com.example.route.domain.model.Product
 import kotlinx.coroutines.flow.Flow
 
-interface ProductRepo {
+interface ProductsRepo {
     suspend fun getProducts(
         sortBy: SortBy? = null,
         category: String? = null,

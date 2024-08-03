@@ -1,4 +1,4 @@
-package com.example.route.data.datasource
+package com.example.route.data.datasource.product
 
 import com.example.route.data.api.WebServices
 import com.example.route.data.contract.ProductsOnlineDataSource
