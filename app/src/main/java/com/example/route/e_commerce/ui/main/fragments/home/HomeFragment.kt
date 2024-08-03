@@ -103,12 +103,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeFragmentViewModel>() 
         binding.categoryProductsShimmerViewContainer.isVisible = true
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding.unbind()
-
-    }
-
-
 }
