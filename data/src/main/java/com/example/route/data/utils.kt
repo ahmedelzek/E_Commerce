@@ -1,11 +1,14 @@
 package com.example.route.data
 
+import android.util.Log
 import com.example.route.data.api.model.Response
 import com.example.route.domain.common.AuthError
 import com.example.route.domain.common.InternetConnectionError
 import com.example.route.domain.common.Resource
 import com.example.route.domain.common.ServerError
+import com.example.route.domain.model.AuthResponse
 import com.google.gson.Gson
+import com.route.data.api.model.auth.AuthResponseDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -64,7 +67,6 @@ suspend fun <T> toFlow(getData: suspend () -> T): Flow<Resource<T>> {
         }
 }
 
-/*
 suspend fun <T> executeAuth(apiCall: suspend () -> T): T {
     try {
         return apiCall.invoke()
@@ -72,7 +74,7 @@ suspend fun <T> executeAuth(apiCall: suspend () -> T): T {
         if (ex.code() == 401) {
             val serverResponse = ex.response()?.errorBody()?.string()
             Log.e("serverResponse->", "$serverResponse")
-            val errorResponse = Gson().fromJson(serverResponse, AuthResponse::class.java)
+            val errorResponse = Gson().fromJson(serverResponse, AuthResponseDto::class.java)
             throw AuthError(
                 errorResponse.message,
                 ex,
@@ -95,4 +97,3 @@ suspend fun <T> executeAuth(apiCall: suspend () -> T): T {
         throw ex
     }
 }
-*/

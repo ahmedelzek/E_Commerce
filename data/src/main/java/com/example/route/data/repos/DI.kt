@@ -1,8 +1,10 @@
 package com.example.route.data.repos
 
+import com.example.route.data.repos.auth.AuthRepoImpl
 import com.example.route.data.repos.category.CategoriesRepoImpl
 import com.example.route.data.repos.product.ProductRepoImpl
 import com.example.route.data.repos.subcategory.SubcategoriesRepoImpl
+import com.example.route.domain.contract.auth.AuthRepo
 import com.example.route.domain.contract.category.CategoriesRepo
 import com.example.route.domain.contract.product.ProductsRepo
 import com.example.route.domain.contract.subcategory.SubcategoriesRepo
@@ -30,5 +32,8 @@ abstract class RepositoryModule {
         subcategoriesRepoImpl: SubcategoriesRepoImpl
     ): SubcategoriesRepo
 
-
+    @Binds
+    abstract fun bindAuthRepo(
+        authRepoImpl: AuthRepoImpl
+    ): AuthRepo
 }
