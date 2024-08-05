@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.route.domain.common.Resource
 import com.example.route.domain.usecase.GetCategoriesUseCase
-import com.example.route.domain.usecase.GetProductsUseCase
+import com.example.route.domain.usecase.GetSubcategoriesUseCase
 import com.example.route.e_commerce.base.BaseViewModel
 import com.example.route.e_commerce.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CategoriesFragmentViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
-    private val getProductsUseCase: GetProductsUseCase
+    private val getSubcategoriesUseCase: GetSubcategoriesUseCase
 ) : BaseViewModel(), CategoriesContract.ViewModel {
 
 
@@ -43,24 +43,25 @@ class CategoriesFragmentViewModel @Inject constructor(
         }
 
     }
-
-    private fun getProducts(categoryId: String?) {
+    private fun getSubcategories(categoryId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            getProductsUseCase.invoke(categoryId)
-                .collect { resourse ->
-                    when (resourse) {
+            getSubcategoriesUseCase.invoke()
+                .collect { response ->
+                    when (response) {
                         is Resource.Success -> {
+                            val subcategories =
+                                response.data?.filter {
+                                    it.category == categoryId
+                                }
                             _state.emit(
                                 CategoriesContract.State.Success(
-                                    products = resourse.data
-                                )
+                                    subcategoriesList = subcategories,
+                                ),
                             )
                         }
 
                         else -> {
-                            extractViewMessage(resourse)?.let {
-                                _event.postValue(CategoriesContract.Event.ShowMessage(it))
-                            }
+                            extractViewMessage(response)
                         }
                     }
                 }
@@ -83,11 +84,13 @@ class CategoriesFragmentViewModel @Inject constructor(
                 initPage()
             }
 
-            is CategoriesContract.Action.LoadProducts -> {
+            is CategoriesContract.Action.LoadSubcategories -> {
+                getSubcategories(action.categoryId)
             }
         }
     }
 
     private fun initPage() {
+        getCategories()
     }
 }
