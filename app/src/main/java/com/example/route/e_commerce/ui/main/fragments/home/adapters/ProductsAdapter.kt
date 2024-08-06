@@ -1,5 +1,6 @@
 package com.example.route.e_commerce.ui.main.fragments.home.adapters
 
+import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -58,6 +59,7 @@ class ProductsAdapter(private var products: List<Product?>? = null) :
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun bindProducts(products: List<Product?>) {
         this.products = products
         notifyDataSetChanged()
