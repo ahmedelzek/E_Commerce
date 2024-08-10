@@ -1,5 +1,9 @@
 package com.example.route.data.api
 
+import com.example.route.data.api.web_services.AuthWebServices
+import com.example.route.data.api.web_services.CategoryWebServices
+import com.example.route.data.api.web_services.ProductWebServices
+import com.example.route.data.api.web_services.SubcategoryWebServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,8 +46,21 @@ class NetworkModule {
             .build()
     }
     @Provides
-    fun provideWebServices(retrofit: Retrofit): WebServices {
-        return retrofit.create(WebServices::class.java)
+    fun provideAuthWebServices(retrofit: Retrofit): AuthWebServices {
+        return retrofit.create(AuthWebServices::class.java)
+    }
+    @Provides
+    fun provideCategoryWebServices(retrofit: Retrofit): CategoryWebServices {
+        return retrofit.create(CategoryWebServices::class.java)
+    }
+    @Provides
+    fun provideSubcategoryWebServices(retrofit: Retrofit): SubcategoryWebServices {
+        return retrofit.create(SubcategoryWebServices::class.java)
+    }
+
+    @Provides
+    fun provideProductWebServices(retrofit: Retrofit): ProductWebServices {
+        return retrofit.create(ProductWebServices::class.java)
     }
 
 }

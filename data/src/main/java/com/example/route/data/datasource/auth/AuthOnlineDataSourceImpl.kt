@@ -1,6 +1,6 @@
 package com.example.route.data.datasource.auth
 
-import com.example.route.data.api.WebServices
+import com.example.route.data.api.web_services.AuthWebServices
 import com.example.route.data.contract.AuthOnlineDataSource
 import com.example.route.data.executeAuth
 import com.example.route.domain.model.AuthResponse
@@ -10,7 +10,7 @@ import javax.inject.Inject
 class AuthOnlineDataSourceImpl
 @Inject
 constructor(
-    private val webServices: WebServices,
+    private val webServices: AuthWebServices,
 ) : AuthOnlineDataSource {
     override suspend fun signUp(
         userName: String,
