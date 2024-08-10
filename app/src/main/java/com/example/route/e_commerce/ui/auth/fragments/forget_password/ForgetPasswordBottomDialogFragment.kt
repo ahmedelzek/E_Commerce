@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.route.e_commerce.databinding.FragmentForgetPasswordBottomDialogBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,11 +59,11 @@ class ForgetPasswordBottomDialogFragment : BottomSheetDialogFragment() {
     }
 
     private fun navigateToResetFragment() {
-      /*  val action =
+        val action =
             ForgetPasswordBottomDialogFragmentDirections.actionForgetPasswordBottomDialogFragmentToResetPasswordFragment(
-                binding.emailText.text.toString(),
+                binding.emailText.text.toString()
             )
-        findNavController().navigate(action)*/
+        findNavController().navigate(action)
     }
 
     private fun showLoadingView() {
