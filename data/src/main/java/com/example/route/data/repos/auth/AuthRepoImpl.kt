@@ -5,6 +5,7 @@ import com.example.route.data.toFlow
 import com.example.route.domain.common.Resource
 import com.example.route.domain.contract.auth.AuthRepo
 import com.example.route.domain.model.AuthResponse
+import com.example.route.domain.model.User
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -34,5 +35,44 @@ constructor(
         }
     }
 
+    override suspend fun updateAccountUserName(
+        token: String,
+        newName: String,
+    ): Flow<Resource<User?>> {
+        return toFlow {
+            authOnlineDataSource.updateAccountName(token, newName)
+        }
+    }
+
+    override suspend fun updateAccountPassword(
+        token: String,
+        currentPassword: String,
+        newPassword: String,
+        confirmPassword: String,
+    ): Flow<Resource<AuthResponse?>> {
+        return toFlow {
+            authOnlineDataSource.updateAccountPassword(
+                token,
+                currentPassword,
+                newPassword,
+                confirmPassword,
+            )
+        }
+    }
+
+    override suspend fun forgetPassword(email: String): Flow<Resource<String?>> {
+        return toFlow { authOnlineDataSource.forgetPassword(email) }
+    }
+
+    override suspend fun verifyResetCode(resetCode: String): Flow<Resource<String?>> {
+        return toFlow { authOnlineDataSource.verifyResetCode(resetCode) }
+    }
+
+    override suspend fun resetPassword(
+        email: String,
+        newPassword: String,
+    ): Flow<Resource<String?>> {
+        return toFlow { authOnlineDataSource.resetPassword(email, newPassword) }
+    }
 
 }

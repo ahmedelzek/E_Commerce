@@ -1,6 +1,7 @@
 package com.example.route.data.contract
 
 import com.example.route.domain.model.AuthResponse
+import com.example.route.domain.model.User
 
 interface AuthOnlineDataSource {
     suspend fun signUp(
@@ -15,5 +16,26 @@ interface AuthOnlineDataSource {
         email: String,
         password: String,
     ): AuthResponse?
+
+    suspend fun updateAccountName(
+        token: String,
+        newName: String,
+    ): User?
+
+    suspend fun updateAccountPassword(
+        token: String,
+        currentPassword: String,
+        newPassword: String,
+        confirmPassword: String,
+    ): AuthResponse?
+
+    suspend fun forgetPassword(email: String): String?
+
+    suspend fun verifyResetCode(resetCode: String): String?
+
+    suspend fun resetPassword(
+        email: String,
+        newPassword: String,
+    ): String?
 
 }
