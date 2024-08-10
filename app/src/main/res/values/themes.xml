@@ -7,6 +7,9 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
 
+        <style name="CornerSize20Percent">
+            <item name="cornerSize">20%</item>
+        </style>
 
     </style>
     <style name="Theme.E_Commerce" parent="Base.Theme.RouteECommerce" />

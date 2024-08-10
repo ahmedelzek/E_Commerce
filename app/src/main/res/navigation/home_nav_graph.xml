@@ -36,7 +36,7 @@
         tools:layout="@layout/fragment_products" />
     <fragment
         android:id="@+id/wishListFragment"
-        android:name="com.example.route.e_commerce.ui.main.fragments.wishList.WishListFragment"
+        android:name="com.example.route.e_commerce.ui.main.fragments.wish_list.WishListFragment"
         android:label="fragment_wishlist"
         tools:layout="@layout/fragment_wish_list" />
     <fragment

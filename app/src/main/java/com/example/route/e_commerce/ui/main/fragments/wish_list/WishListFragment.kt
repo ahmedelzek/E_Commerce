@@ -1,4 +1,4 @@
-package com.example.route.e_commerce.ui.main.fragments.wishList
+package com.example.route.e_commerce.ui.main.fragments.wish_list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
