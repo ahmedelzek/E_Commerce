@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Route E-Commerce</string>
+    <string name="app_name">E-Commerce</string>
     <string name="home">Home</string>
     <string name="categories">Categories</string>
     <string name="wishlist">Wishlist</string>
@@ -46,4 +46,11 @@
     <string name="sign_in_with_your_mail">Please sign in with your mail</string>
     <string name="sign_in">Sign in</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="send_code">send code</string>
+    <string name="set_new_password">Set New Password</string>
+    <string name="new_password">New Password</string>
+    <string name="update">update</string>
+    <string name="enter_the_reset_code">Enter The Reset Code</string>
+    <string name="resend">Resend</string>
+    <string name="verify">verify</string>
 </resources>
