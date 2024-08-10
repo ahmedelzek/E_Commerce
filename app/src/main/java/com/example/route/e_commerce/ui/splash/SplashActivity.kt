@@ -20,6 +20,6 @@ class SplashActivity : AppCompatActivity() {
             val mainIntent = Intent(this, AuthActivity::class.java)
             startActivity(mainIntent)
             finish()
-        }, 1500)
+        }, 1000)
     }
 }
