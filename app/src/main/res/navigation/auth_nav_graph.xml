@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgetPasswordBottomDialogFragment"
+            app:destination="@id/forgetPasswordBottomDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -22,4 +25,14 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/forgetPasswordBottomDialogFragment"
+        android:name="com.example.route.e_commerce.ui.auth.fragments.forget_password.ForgetPasswordBottomDialogFragment"
+        android:label="fragment_forget_password_bottom_dialog"
+        tools:layout="@layout/fragment_forget_password_bottom_dialog">
+        <action
+            android:id="@+id/action_forgetPasswordBottomDialogFragment_to_resetPasswordFragment"
+            app:popUpTo="@id/forgetPasswordBottomDialogFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
 </navigation>

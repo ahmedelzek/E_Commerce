@@ -73,7 +73,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
             navigateToRegister()
         }
         binding.forgotPassword.setOnClickListener {
-            //navToForgetPasswordScreen()
+            navToForgetPasswordScreen()
         }
     }
 
@@ -96,6 +96,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginFragmentViewModel>
 
     private fun navigateToRegister() {
         findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+    }
+
+    private fun navToForgetPasswordScreen() {
+        val action =
+            LoginFragmentDirections.actionLoginFragmentToForgetPasswordBottomDialogFragment()
+        findNavController().navigate(action)
     }
 
     private fun navigateToHome(userData: AuthResponse) {
