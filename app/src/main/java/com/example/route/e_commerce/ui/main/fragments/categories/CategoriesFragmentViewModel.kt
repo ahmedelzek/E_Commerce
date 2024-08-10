@@ -3,8 +3,8 @@ package com.example.route.e_commerce.ui.main.fragments.categories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.route.domain.common.Resource
-import com.example.route.domain.usecase.GetCategoriesUseCase
-import com.example.route.domain.usecase.GetSubcategoriesUseCase
+import com.example.route.domain.usecase.category.GetCategoriesUseCase
+import com.example.route.domain.usecase.category.GetSubcategoriesUseCase
 import com.example.route.e_commerce.base.BaseViewModel
 import com.example.route.e_commerce.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel

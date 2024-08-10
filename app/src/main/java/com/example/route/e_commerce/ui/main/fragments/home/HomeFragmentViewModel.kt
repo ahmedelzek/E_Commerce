@@ -3,9 +3,9 @@ package com.example.route.e_commerce.ui.main.fragments.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.route.domain.common.Resource
-import com.example.route.domain.usecase.GetCategoriesUseCase
-import com.example.route.domain.usecase.GetMostSellingProductsUseCase
-import com.example.route.domain.usecase.GetProductsUseCase
+import com.example.route.domain.usecase.category.GetCategoriesUseCase
+import com.example.route.domain.usecase.product.GetMostSellingProductsUseCase
+import com.example.route.domain.usecase.product.GetProductsUseCase
 import com.example.route.e_commerce.base.BaseViewModel
 import com.example.route.e_commerce.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
