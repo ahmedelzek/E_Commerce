@@ -5,7 +5,6 @@
     <string name="wishlist">Wishlist</string>
     <string name="profile">Profile</string>
     <string name="what_do_you_search_for">what do you search for?</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="your_full_name">Your full name</string>
     <string name="your_email">Your Email</string>
@@ -53,5 +52,6 @@
     <string name="enter_the_reset_code">Enter The Reset Code</string>
     <string name="resend">Resend</string>
     <string name="verify">verify</string>
-    <string name="you_don_t_have_any_items_yet">You Don\'t Have Any Items Yet...!</string>
+    <string name="you_don_t_have_any_items_yet">You Don\'t Have Any Items Yet…!</string>
+    <string name="egp">EGP %1$s</string>
 </resources>

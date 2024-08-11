@@ -4,6 +4,7 @@ import com.example.route.data.api.web_services.AuthWebServices
 import com.example.route.data.api.web_services.CategoryWebServices
 import com.example.route.data.api.web_services.ProductWebServices
 import com.example.route.data.api.web_services.SubcategoryWebServices
+import com.example.route.data.api.web_services.WishlistWebServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -62,5 +63,10 @@ class NetworkModule {
     fun provideProductWebServices(retrofit: Retrofit): ProductWebServices {
         return retrofit.create(ProductWebServices::class.java)
     }
+    @Provides
+    fun provideWishlistWebServices(retrofit: Retrofit): WishlistWebServices {
+        return retrofit.create(WishlistWebServices::class.java)
+    }
+
 
 }
