@@ -8,6 +8,14 @@
             name="product"
             type="com.example.route.domain.model.Product" />
 
+        <variable
+            name="isWishlist"
+            type="Boolean" />
+
+        <variable
+            name="isItemCart"
+            type="Boolean" />
+
     </data>
 
     <com.google.android.material.card.MaterialCardView
