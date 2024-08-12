@@ -1,4 +1,4 @@
-package com.example.route.domain.usecase
+package com.example.route.domain.usecase.category
 
 import com.example.route.domain.common.Resource
 import com.example.route.domain.contract.subcategory.SubcategoriesRepo

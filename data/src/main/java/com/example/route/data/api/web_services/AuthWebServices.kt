@@ -1,20 +1,13 @@
-package com.example.route.data.api
+package com.example.route.data.api.web_services
 
-import com.example.route.data.api.model.Response
-import com.example.route.data.api.model.categroy.CategoryDto
-import com.example.route.data.api.model.product.ProductDto
-import com.example.route.data.api.model.subcategory.SubcategoryDto
 import com.route.data.api.model.auth.AuthResponseDto
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Query
 
-interface WebServices {
-
+interface AuthWebServices {
 
     @FormUrlEncoded
     @POST("/api/v1/auth/signup")
@@ -67,17 +60,4 @@ interface WebServices {
         @Field("email") email: String,
         @Field("newPassword") newPassword: String,
     ): AuthResponseDto
-
-    @GET("/api/v1/categories")
-    suspend fun getCategories(): Response<List<CategoryDto?>?>
-
-    @GET("/api/v1/products")
-    suspend fun getProducts(
-        @Query("sort") sortBy: String? = null,
-        @Query("category") categoryId: String? = null,
-        @Query("brand") brandId: String? = null
-    ): Response<List<ProductDto?>?>
-
-    @GET("api/v1/subcategories")
-    suspend fun getAllSubcategories(): Response<List<SubcategoryDto?>?>
 }

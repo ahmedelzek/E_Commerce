@@ -9,6 +9,12 @@
 
 
     </style>
+
     <style name="Theme.E_Commerce" parent="Base.Theme.RouteECommerce" />
+
+
+    <style name="CornerSize20Percent">
+        <item name="cornerSize">20%</item>
+    </style>
 
 </resources>
